@@ -1,68 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Homework #7
+[Пример](http://5a14726ba1147763fd95909f.peaceful-johnson-d236f0.netlify.com)
 
-## Available Scripts
+Используя api сервиса tvmaze.com необходимо построить систему поиска сериалов по названию и описанию. Также требуется сделать роутинг и переходы на страницы найденных сериалов. На страницах сериалов нужно обязательно отразить актеров, которые участвовали.
 
-In the project directory, you can run:
 
-### `yarn start`
+Требования к домашнему заданию:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Для работы с api в репозитории будет находится фаил `src/api.js` с готовыми функциями для поиска и получения сериала по id.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2. Сетевые запросы должны совершаться из middleware.
 
-### `yarn test`
+3. Для работы с асинхронными запросами нужно воспользоваться 3 экшенами `_REQUEST`, `_SUCCESS`, `_FAILURE`.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Для создания всех экшенов использовать методы `createAction` и `createActions` из библиотеки `redux-actions`.
 
-### `yarn build`
+5. Для описания редьюсеров обязательно использовать методы `handleAction` и `handleActions`  из библиотеки `redux-actions`.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+6. Для каждого сериала url страницы должен выглядеть как **/shows/:id** где `id` — id сериала с сайта `tvmaze.com`.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+7. При переходе на страницу сериала из поиска должен совершать сетевой запрос за информацие о сериале, и в это время нужно отражать надпись, сообщающую о том, что происходит загрузка.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+8. При поиске на странице поиска так же должна выводиться надпись о том, что происходит загрузка, пока происходит сетевой запрос.
 
-### `yarn eject`
+9. Выдача результатов поиска должна содержать картинки, краткое содержание и ссылку на страницу сериала.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Подсказки
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Поле `summary` в ответах на запросы `api.tvmaze.com` содержит описание вместе с html тегами. Чтобы вывести html в реакте, воспользуйтесь методом **dangerouslySetInnerHTML**:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+<div dangerouslySetInnerHTML={{__html: summary}} />
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
