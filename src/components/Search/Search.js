@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { searchRequest } from '../../actions'
+
 import './Search.css';
 
 class Search extends Component {
@@ -27,8 +30,11 @@ class Search extends Component {
 
   handleChange = (event) => this.setState({ query: event.target.value });
 
-  handleClick = () => {};
+  handleClick = () => {
+    console.log(this.props);
+    this.props.searchRequest();
+  };
 
 }
 
-export default Search;
+export default connect(null, { searchRequest })(Search);

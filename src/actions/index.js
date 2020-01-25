@@ -1,17 +1,17 @@
 import { createActions } from 'redux-actions';
 
 const actionCreators = createActions({
-  SEARCH: {
-    REQUEST: undefined,
-    SUCCESS: [
+  SHOW: {
+    SEARCH_REQUEST: undefined,
+    SEARCH_SUCCESS: [
       (shows) => ({shows}),
       (shows) => ({ length: shows.length })
     ],
-    FAILURE: undefined
+    SEARCH_FAILURE: undefined
   }
 });
 
 export const {
-  searchRequest,
-  searchSuccess,
-  searchFailure } = actionCreators;
+  show: { searchRequest,
+          searchSuccess,
+          serachFailure }} = actionCreators;
