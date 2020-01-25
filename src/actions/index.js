@@ -4,7 +4,7 @@ const actionCreators = createActions({
   SHOW: {
     SEARCH_REQUEST: undefined,
     SEARCH_SUCCESS: [
-      (shows) => ({shows}),
+      shows => shows,
       (shows) => ({ length: shows.length })
     ],
     SEARCH_FAILURE: undefined
@@ -14,4 +14,4 @@ const actionCreators = createActions({
 export const {
   show: { searchRequest,
           searchSuccess,
-          serachFailure }} = actionCreators;
+          searchFailure }} = actionCreators;
