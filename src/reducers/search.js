@@ -10,6 +10,14 @@ const isFetching = handleActions({
   false
 );
 
+const isFetched = handleActions({
+    [searchRequest]: () => false,
+    [searchSuccess]: () => true,
+    [searchFailure]: () => false
+  },
+  false
+);
+
 const result = handleAction(
   searchSuccess,
   (state, action) => action.payload,
@@ -24,6 +32,7 @@ const error = handleAction(
 
 export default combineReducers({
   isFetching,
+  isFetched,
   result,
   error
 });

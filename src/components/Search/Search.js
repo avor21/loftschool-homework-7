@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { searchRequest } from '../../actions'
+import { getSearchResultSelector,
+  getIsFetchingSelector, getIsFetchedSelector,
+  getSearchErrorSelector } from '../../reducers'
 
 import './Search.css';
 
 class Search extends Component {
   state = {
-    query: ''
+    query: '',
+    lastQuery: ''
   };
 
   render() {
-    const { query } = this.state;
+    const { query, lastQuery } = this.state;
+    const { shows, isFetching, isFetched } = this.props;
 
     return (
       <div className="search">
@@ -24,6 +29,11 @@ class Search extends Component {
             Найти
           </button>
         </div>
+        <div className="content-wrapper" >
+          <h4>{ isFetching && 'Идёт поиск сериалов. Пожалуйста, подождите...' }</h4>
+          <h4>{ isFetched && `Результаты поиска по запросу: ${lastQuery}`}</h4>
+          { shows.map(show => <p>{show.name}</p>) }
+        </div>
       </div>
     );
   }
@@ -31,10 +41,17 @@ class Search extends Component {
   handleChange = (event) => this.setState({ query: event.target.value });
 
   handleClick = () => {
-    console.log(this.props);
-    this.props.searchRequest();
+    const { searchRequest } = this.props;
+    const { query } = this.state;
+
+    this.setState({ lastQuery: query});
+    searchRequest();
   };
 
 }
 
-export default connect(null, { searchRequest })(Search);
+export default connect(state => ({
+  shows: getSearchResultSelector(state),
+  isFetching: getIsFetchingSelector(state),
+  isFetched: getIsFetchedSelector(state)
+}), { searchRequest })(Search);

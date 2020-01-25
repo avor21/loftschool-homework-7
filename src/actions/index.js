@@ -1,7 +1,7 @@
 import { createActions } from 'redux-actions';
 
 const actionCreators = createActions({
-  SHOW: {
+  SHOWS: {
     SEARCH_REQUEST: undefined,
     SEARCH_SUCCESS: [
       shows => shows,
@@ -12,6 +12,6 @@ const actionCreators = createActions({
 });
 
 export const {
-  show: { searchRequest,
+  shows: { searchRequest,
           searchSuccess,
           searchFailure }} = actionCreators;
