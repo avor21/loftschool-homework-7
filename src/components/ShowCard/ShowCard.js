@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import {Button, Card, Icon, Image, Label} from 'semantic-ui-react'
 import {connect} from "react-redux";
+import {fetchShowRequest} from '../../actions'
 
 class ShowCard extends Component{
   render() {
-    const { name, summary,
+    const { id, name, summary,
     image, rating: { average : avgRating} } = this.props.show;
 
     return (
@@ -28,7 +29,7 @@ class ShowCard extends Component{
           <Card.Description dangerouslySetInnerHTML={{__html: summary}} />
         </Card.Content>
         <Card.Content extra>
-          <Button basic fluid onClick={this.onClickHandler}>
+          <Button basic fluid onClick={() => this.onClickHandler(id)}>
             <Icon name="film"/>
             Перейти к сериалу
           </Button>
@@ -37,10 +38,8 @@ class ShowCard extends Component{
     );
   }
 
-  onClickHandler = () => {
-
-  };
+  onClickHandler = (id) => this.props.fetchShowRequest(id);
 
 }
 
-export default connect(null, {  })(ShowCard);
+export default connect(null, { fetchShowRequest })(ShowCard);
