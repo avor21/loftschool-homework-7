@@ -20,16 +20,13 @@ class Search extends Component {
 
     return (
       <div className="search">
-        <div className="search-panel-wrapper">
+        <form className="search-panel-wrapper" onSubmit={this.handleSubmit} >
           <input className="search-field"
                  onChange={this.handleChange}
                  value={query}
                  placeholder="Поиск фильма"/>
-          <button className="search-btn"
-                  onClick={this.handleClick}>
-            Найти
-          </button>
-        </div>
+          <button className="search-btn">Найти</button>
+        </form>
         <div className="content-wrapper" >
           <h4>{ isFetching && 'Идёт поиск сериала. Пожалуйста, подождите...' }</h4>
           <h4>{ isFetched && `Результаты поиска по запросу: ${lastQuery}`}</h4>
@@ -41,7 +38,8 @@ class Search extends Component {
 
   handleChange = (event) => this.setState({ query: event.target.value });
 
-  handleClick = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { searchRequest } = this.props;
     const { query } = this.state;
 
