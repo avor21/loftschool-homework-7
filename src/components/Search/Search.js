@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { searchRequest } from '../../actions'
-import { getSearchResultSelector,
-  getIsFetchingSelector, getIsFetchedSelector,
-  getSearchErrorSelector } from '../../reducers'
+import {
+  getSearchResultSelector,
+  getIsFetchingSelector,
+  getIsFetchedSelector } from '../../reducers'
 
 import './Search.css';
 
@@ -30,9 +31,9 @@ class Search extends Component {
           </button>
         </div>
         <div className="content-wrapper" >
-          <h4>{ isFetching && 'Идёт поиск сериалов. Пожалуйста, подождите...' }</h4>
+          <h4>{ isFetching && 'Идёт поиск сериала. Пожалуйста, подождите...' }</h4>
           <h4>{ isFetched && `Результаты поиска по запросу: ${lastQuery}`}</h4>
-          { shows.map(show => <p>{show.name}</p>) }
+          { shows.map(show => <p key={show.id}>{show.name}</p>) }
         </div>
       </div>
     );
@@ -45,7 +46,7 @@ class Search extends Component {
     const { query } = this.state;
 
     this.setState({ lastQuery: query});
-    searchRequest();
+    searchRequest(query);
   };
 
 }
