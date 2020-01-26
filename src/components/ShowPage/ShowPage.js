@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { fetchShowRequest } from '../../actions';
 import { getEntitiesSelector, getIsFetchingEntitiesSelector } from '../../reducers';
 import './ShowPage.css';
+import {Segment, Item} from "semantic-ui-react";
 
 class ShowPage extends Component {
   componentDidMount() {
@@ -12,15 +13,21 @@ class ShowPage extends Component {
 
   render() {
     const { show, isFetching } = this.props;
-
-    if (isFetching) {
-      return <h4>Загрузка данных о сериале</h4>;
-    }
+    const { id, name, summary,
+      image } = this.props.show;
 
     return (
-      <div>
-        <p>{show.id}</p>
-      </div>
+      <Segment loading={isFetching}>
+        <Item.Group>
+          <Item>
+            <Item.Image src={image && image.medium}/>
+            <Item.Content>
+              <Item.Header>{name}</Item.Header>
+              <Item.Description dangerouslySetInnerHTML={{__html: summary}} />
+            </Item.Content>
+          </Item>
+        </Item.Group>
+      </Segment>
     );
   }
 }
