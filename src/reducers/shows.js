@@ -13,7 +13,7 @@ const isFetching = handleActions({
 const entities = handleAction(
   fetchShowSuccess,
   (state, action) => action.payload,
-  {}
+  null
 );
 
 const error = handleAction(
