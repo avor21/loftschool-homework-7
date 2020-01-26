@@ -13,10 +13,17 @@ const isFetching = handleActions({
 const entities = handleAction(
   fetchShowSuccess,
   (state, action) => action.payload,
-  []
+  {}
+);
+
+const error = handleAction(
+  fetchShowFailure,
+  (state, action) => action.payload,
+  null
 );
 
 export default combineReducers({
   isFetching,
-  entities
+  entities,
+  error
 });

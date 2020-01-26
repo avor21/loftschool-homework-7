@@ -1,15 +1,31 @@
-import React from "react";
-import { useParams } from 'react-router-dom';
+import React, {Component} from "react";
+import {connect} from 'react-redux';
+import { fetchShowRequest } from '../../actions';
+import { getEntitiesSelector, getIsFetchingEntitiesSelector } from '../../reducers';
 import './ShowPage.css';
 
-const ShowPage = (props) => {
-  const { id } = useParams();
+class ShowPage extends Component {
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.props.fetchShowRequest(id);
+  }
 
-  return (
-    <div>
-      <p>{id}</p>
-    </div>
-  );
-};
+  render() {
+    const { show, isFetching } = this.props;
 
-export default ShowPage;
+    if (isFetching) {
+      return <h4>Загрузка данных о сериале</h4>;
+    }
+
+    return (
+      <div>
+        <p>{show.id}</p>
+      </div>
+    );
+  }
+}
+
+export default connect(state => ({
+  show: getEntitiesSelector(state),
+  isFetching: getIsFetchingEntitiesSelector(state)
+}), { fetchShowRequest })(ShowPage);
