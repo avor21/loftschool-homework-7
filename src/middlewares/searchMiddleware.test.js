@@ -10,7 +10,7 @@ describe('searchMiddleware', () => {
     const storeMock = {
       dispatch: jest.fn().mockImplementation(() => '')
     };
-    searchMiddleware(storeMock)(jest.fn())({type: 'SEARCH_REQUEST'});
+    searchMiddleware(storeMock)(jest.fn())({type: 'SHOWS/SEARCH/SEARCH_REQUEST'});
     expect(search).toHaveBeenCalledTimes(1);
   });
   it('Если promise resolved то middleware отправляет экшен SEARCH_SUCCESS', done => {
@@ -18,7 +18,7 @@ describe('searchMiddleware', () => {
     const storeMock = {
       dispatch: dispatchMock
     };
-    searchMiddleware(storeMock)(jest.fn())({type: 'SEARCH_REQUEST'});
+    searchMiddleware(storeMock)(jest.fn())({type: 'SHOWS/SEARCH/SEARCH_REQUEST'});
     setTimeout(() => {
       expect(dispatchMock).toHaveBeenCalledTimes(1);
       done();
