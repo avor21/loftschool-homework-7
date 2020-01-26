@@ -5,8 +5,11 @@ import {
   getSearchResultSelector,
   getIsFetchingSelector,
   getIsFetchedSelector } from '../../reducers'
+import ShowCard from "../ShowCard";
+import { Card } from "semantic-ui-react";
 
 import './Search.css';
+
 
 class Search extends Component {
   state = {
@@ -29,8 +32,10 @@ class Search extends Component {
         </form>
         <div className="content-wrapper" >
           <h4>{ isFetching && 'Идёт поиск сериала. Пожалуйста, подождите...' }</h4>
-          <h4>{ isFetched && `Результаты поиска по запросу: ${lastQuery}`}</h4>
-          { shows.map(show => <p key={show.id}>{show.name}</p>) }
+          <h4>{ isFetched && `Результаты поиска по запросу: "${lastQuery}"`}</h4>
+          <Card.Group>
+            { shows.map(show => <ShowCard key={show.id} show={show}/>) }
+          </Card.Group>
         </div>
       </div>
     );
