@@ -1,8 +1,15 @@
 import React from "react";
+import { useParams } from 'react-router-dom';
 import './ShowPage.css';
 
-const ShowPage = () => {
-  return <h1>Show page</h1>;
+const ShowPage = (props) => {
+  const { id } = useParams();
+
+  return (
+    <div>
+      <p>{id}</p>
+    </div>
+  );
 };
 
 export default ShowPage;
